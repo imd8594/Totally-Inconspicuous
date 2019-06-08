@@ -1,0 +1,36 @@
+{
+  "name": "bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node --experimental-modules bot.mjs",
+    "dev": "NODE_ENV=dev nodemon --experimental-modules bot.mjs ---ignore data/*.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "discord": "^0.8.2",
+    "discord.js": "^11.5.0",
+    "dotenv": "^8.0.0",
+    "fs": "0.0.2",
+    "simplesky": "^1.1.1",
+    "snoowrap": "^1.15.2"
+  },
+  "engines": {
+    "node": "^12.2.0",
+    "npm": "6.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.17.3",
+    "nodemon": "^1.19.1"
+  }
+}
