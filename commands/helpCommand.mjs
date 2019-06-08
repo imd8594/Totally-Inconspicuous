@@ -41,7 +41,7 @@ export const getHelpCommand = async (args, message) => {
           .addField('!ti events sub <eventId>', 'Subscribe to someone elses event')
           .addField('!ti events unsub <eventId>', 'Unsubscribe from someone elses event')
           .addField('!ti events cancel <eventId>', 'Cancel event that you are hosting (Must be event host)')
-          .addField('!ti events list [eventId]', 'List all events, or specify eventId to list details for that one event'),
+          .addField('!ti events list [<eventId>]', 'List all events, or specify eventId to list details for that one event'),
         true);
     // Admin commands
     case 'config':
