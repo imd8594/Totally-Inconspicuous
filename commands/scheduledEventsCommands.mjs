@@ -99,13 +99,13 @@ export const scheduleNewEvent = async (args, message) => {
 export const cancelEvent = async (args, message) => {
   const eventId = args[2];
   const events = await readObjectsFromFile(eventsFilePath);
-  if (Object.keys(events).lengh === 0) {
-    return sendMessageWithOptions(message, 'There are currently no events', true);
-  }
-
   const event = events[eventId];
+
   if (event === undefined) {
     return sendMessageWithOptions(message, `Event ${eventId} does not exist`, true);
+  }
+  if (!Object.keys(events).length) {
+    return sendMessageWithOptions(message, 'There are currently no events', true);
   }
   const { id } = message.author;
 
@@ -126,14 +126,15 @@ export const cancelEvent = async (args, message) => {
 export const subscribeToEvent = async (args, message) => {
   const eventId = args[2];
   const events = await readObjectsFromFile(eventsFilePath);
-  if (Object.keys(events).lengh === 0) {
-    return sendMessageWithOptions(message, 'There are currently no events', true);
-  }
-
   const event = events[eventId];
+
   if (event === undefined) {
     return sendMessageWithOptions(message, `Event ${eventId} does not exist`, true);
   }
+  if (!Object.keys(events).length) {
+    return sendMessageWithOptions(message, 'There are currently no events', true);
+  }
+
   const { id } = message.author;
   const formattedId = `<@${id}>`;
 
@@ -162,13 +163,12 @@ export const subscribeToEvent = async (args, message) => {
 export const unsubscribeFromEvent = async (args, message) => {
   const eventId = args[2];
   const events = await readObjectsFromFile(eventsFilePath);
-  if (Object.keys(events).lengh === 0) {
-    return sendMessageWithOptions(message, 'There are currently no events', true);
-  }
-
   const event = events[eventId];
   if (event === undefined) {
     return sendMessageWithOptions(message, `Event ${eventId} does not exist`, true);
+  }
+  if (!Object.keys(events).length) {
+    return sendMessageWithOptions(message, 'There are currently no events', true);
   }
   if (message.author.id === event.hostId) {
     return sendMessageWithOptions(message, `The host cannot unsubscribe from their own event. Try !ti events cancel ${eventId} instead if you meant to cancel the event`, true);
@@ -200,7 +200,7 @@ export const unsubscribeFromEvent = async (args, message) => {
 
 export const showUpcomingEvents = async (args, message) => {
   const events = await readObjectsFromFile(eventsFilePath);
-  if (Object.entries(events).lengh === 0) {
+  if (!Object.keys(events).length) {
     return sendMessageWithOptions(message, 'There are currently no events', true);
   }
 
