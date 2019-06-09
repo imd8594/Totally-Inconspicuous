@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable radix */
 /* eslint-disable import/extensions */
 import axios from 'axios';
@@ -46,16 +47,11 @@ const filterResultOfAxiosGet = async (promise, NSFW_FILTER) => {
     if ((!NSFW_FILTER) || (post.data.over_18 ? !NSFW_FILTER : NSFW_FILTER)) {
       return true;
     } return false;
-    // I refuse to be the one who touches this next line
   })
-  .filter(filteredPost => {
     // Filter out posts that don't pass the ImageRegex
-    return ImageRegex.test(filteredPost.data.url)
-  })
-  .map(mapPost => {
+    .filter(filteredPost => ImageRegex.test(filteredPost.data.url))
     // Return just the urls
-    return mapPost.data.url
-  });
+    .map(mapPost => mapPost.data.url);
 
   if (!images.length) {
     throw new NoImagesFoundException();

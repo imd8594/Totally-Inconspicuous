@@ -73,25 +73,23 @@ export const checkPermission = (message, privlege, cb) => {
 // gets config from config.json
 //  optional arg 'channelId' to return specific channel settings from config, else returns whole config
 //  does not validate channel value
-export const getConfig = async (channelId = null) => {
+export const getConfig = async (channelId) => {
   const config = await readObjectsFromFile(configPath);
+  const channelConfig = config[channelId];
 
-  if (channelId) {
-    const channelConfig = config[channelId];
-
-    if (channelConfig === undefined) {
-      // config not found for channel, create new one
-      const newChannelConfig = {
-        [channelId]: {
-          CHANNEL_ID: channelId,
-          NSFW_FILTER: false,
-        },
-      };
-      await writeObjectToFile(newChannelConfig, configPath);
-    } else {
-      return channelConfig;
-    }
-  } else return config;
+  if (channelConfig === undefined) {
+    // config not found for channel, create new one
+    const newChannelConfig = {
+      [channelId]: {
+        CHANNEL_ID: channelId,
+        NSFW_FILTER: false,
+      },
+    };
+    await writeObjectToFile(newChannelConfig, configPath);
+    return newChannelConfig;
+  }
+  // config already exists
+  return channelConfig;
 };
 
 // provided a channel id and key, value pair, makes appropriate change to config.js

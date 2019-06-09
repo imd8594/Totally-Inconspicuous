@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable import/extensions */
 import path from 'path';
 import Discord from 'discord.js';
@@ -12,7 +13,7 @@ const eventsFilePath = path.join(dirname, 'data', 'events.json');
 
 const convertTextToDate = (dateString, timeString) => {
   const dateParts = dateString.split('/').map(part => parseInt(part, 10));
-  if (dateParts[2].toString().length < 4) {
+  if (dateParts.length !== 3 || dateParts[2].toString().length < 4) {
     throw new InvalidDateException();
   }
   const timeParts = timeString.split(':').map(part => parseInt(part, 10));
@@ -23,6 +24,8 @@ const convertTextToDate = (dateString, timeString) => {
   return date;
 };
 
+// Server will set an environment variable `TZ=America/New_York
+// If this is not the case, you will run into problems with events expiring
 const checkEventExpired = (event) => {
   const { date } = event;
   const eventDay = Date.parse(date.day);
@@ -53,6 +56,7 @@ const checkEventExpired = (event) => {
 export const scheduleNewEvent = async (args, message) => {
   let eventDate = '';
   try {
+    console.log('here');
     eventDate = convertTextToDate(args[3], args.slice(4).join(' '));
   } catch (err) {
     return sendMessageWithOptions(message, err.message, true);
@@ -88,7 +92,7 @@ export const scheduleNewEvent = async (args, message) => {
         .addField('Event name: ', `**${event.eventName}**`)
         .addField('Participants: ', `${event.participants.map(participant => participant)}`)
         .addField('Date: ', `${event.date.day} @ ${event.date.time}`)
-        .addField('Event ID: ', `${event.id}`), true);
+        .addField('Event ID: ', `${event.id}`));
   });
 };
 
