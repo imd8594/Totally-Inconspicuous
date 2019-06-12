@@ -1,4 +1,4 @@
-import { sendMessageWithOptions } from '../utils/Utils.mjs';
+import { sendMessageWithOptions } from '../utils/Utils.mjs'; // eslint-disable-line import/extensions
 
 const HOUND_QUOTES = [
   {
@@ -68,7 +68,7 @@ export async function summonDog(message) {
   if (quotes.length > 0) {
     return sendMessageWithOptions(message, quotes[Math.floor(Math.random() * quotes.length)]);
   }
-  return null;
+  return false;
 }
 
 export default summonDog;

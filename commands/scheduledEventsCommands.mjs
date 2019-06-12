@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/extensions */
+/* eslint-disable no-console */
 import path from 'path';
 import Discord from 'discord.js';
 import {
@@ -234,6 +235,7 @@ export const showUpcomingEvents = async (args, message) => {
     } else {
       expiredEventIds.push(eventId);
     }
+    return false;
   });
 
   // cleanup expired events from file

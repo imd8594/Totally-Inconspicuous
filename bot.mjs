@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+/* eslint-disable no-console */
 import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import {
@@ -36,12 +37,13 @@ client.on('message', async (message) => {
   }
 
   // summon Bobby B
+  let bobbyb;
   if (message.content.toLowerCase().includes('bobby b')) {
-    await summonBobbyB(message);
+    bobbyb = await summonBobbyB(message);
   }
 
   // summon Dog
-  await summonDog(message);
+  const dog = await summonDog(message);
 
   // check for prefix
   if (!message.content.startsWith(PREFIX)) return;
@@ -130,7 +132,7 @@ client.on('message', async (message) => {
       break;
     default:
       // command not found/entered
-      await sendMessageWithOptions(message, 'Command not found');
+      if (!dog && !bobbyb) await sendMessageWithOptions(message, 'Command not found');
       break;
   }
 });

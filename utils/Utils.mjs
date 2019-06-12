@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+/* eslint-disable arrow-body-style */
 import fs from 'fs';
 import path from 'path';
 import { FileReadException, FileWriteException } from './exceptions.js';
@@ -11,7 +12,7 @@ const SELF_DESTRUCT_TIMEOUT = 45000;
 export const sendMessageWithOptions = async (message, messageBody,
   selfDestruct = false,
   selfDestructTimeout = SELF_DESTRUCT_TIMEOUT) => {
-  message.channel.send(messageBody).then((msg) => {
+  return message.channel.send(messageBody).then((msg) => {
     if (selfDestruct) {
       msg.delete(selfDestructTimeout);
       message.delete(selfDestructTimeout);
@@ -71,8 +72,8 @@ export const checkPermission = (message, privlege, cb) => {
 };
 
 // gets config from config.json
-//  optional arg 'channelId' to return specific channel settings from config, else returns whole config
-//  does not validate channel value
+// optional arg 'channelId' to return specific channel settings from config, else whole config
+// does not validate channel value
 export const getConfig = async (channelId) => {
   const config = await readObjectsFromFile(configPath);
   const channelConfig = config[channelId];
