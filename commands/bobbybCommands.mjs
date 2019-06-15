@@ -52,7 +52,7 @@ const bobbyBResponses = [
 ];
 
 export const summonBobbyB = async (message) => {
-  if (message.content.includes('bobby b')) {
+  if (message.content.toLowerCase().includes('bobby b')) {
     return sendMessageWithOptions(
       message,
       bobbyBResponses[Math.floor(Math.random() * bobbyBResponses.length)],
