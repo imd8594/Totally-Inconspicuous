@@ -59,7 +59,7 @@ const HOUND_QUOTES = [
  * create a list of each corresponding quote that has a matching string. Then sends a random
  * quote from that list to the channel.
  */
-export async function summonDog(message) {
+export const summonDog = async (message) => {
   if (message.content.toLowerCase().includes('hound')) {
     return sendMessageWithOptions(
       message,
@@ -76,6 +76,6 @@ export async function summonDog(message) {
     return sendMessageWithOptions(message, quotes[Math.floor(Math.random() * quotes.length)]);
   }
   return false;
-}
+};
 
 export default summonDog;
