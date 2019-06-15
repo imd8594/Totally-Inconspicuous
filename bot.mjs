@@ -36,17 +36,17 @@ client.on('message', async (message) => {
     await changeNicknameCommand(message);
   }
 
-  // summon Bobby B
-  let bobbyb;
-  if (message.content.toLowerCase().includes('bobby b')) {
-    bobbyb = await summonBobbyB(message);
+  // check for prefix, bots will ignore messages with prefix
+  if (!message.content.startsWith(PREFIX)) {
+    // summon Bobby B
+    await summonBobbyB(message);
+
+    // summon Dog
+    await summonDog(message);
+
+    // on message function ends here if the prefix does not match
+    return;
   }
-
-  // summon Dog
-  const dog = await summonDog(message);
-
-  // check for prefix
-  if (!message.content.startsWith(PREFIX)) return;
 
   // slice out arguments
   const args = message.content.toLowerCase().slice(PREFIX.length).trim().split(/ +/);
@@ -132,7 +132,7 @@ client.on('message', async (message) => {
       break;
     default:
       // command not found/entered
-      if (!dog && !bobbyb) await sendMessageWithOptions(message, 'Command not found');
+      await sendMessageWithOptions(message, 'Command not found');
       break;
   }
 });

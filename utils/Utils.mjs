@@ -72,7 +72,7 @@ export const checkPermission = (message, privlege, cb) => {
 };
 
 // gets config from config.json
-// optional arg 'channelId' to return specific channel settings from config, else whole config
+// optional arg 'channelId' to return specific channel settings from config, else returns config
 // does not validate channel value
 export const getConfig = async (channelId) => {
   const config = await readObjectsFromFile(configPath);

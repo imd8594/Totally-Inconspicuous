@@ -17,7 +17,7 @@ const { GOOGLE_MAPS_API_KEY } = process.env;
 
 const weather = new Simplesky(GOOGLE_MAPS_API_KEY, DARK_SKY_API_KEY);
 const coordsRecord = [];
-
+console.log(weather);
 const getWeekDay = (day) => {
   const weekdays = [
     'Sunday',

@@ -51,9 +51,14 @@ const bobbyBResponses = [
   'STOP THIS MADNESS, IN THE NAME OF YOUR KING!',
 ];
 
-export const summonBobbyB = async message => sendMessageWithOptions(
-  message,
-  bobbyBResponses[Math.floor(Math.random() * bobbyBResponses.length)],
-);
+export const summonBobbyB = async (message) => {
+  if (message.content.includes('bobby b')) {
+    return sendMessageWithOptions(
+      message,
+      bobbyBResponses[Math.floor(Math.random() * bobbyBResponses.length)],
+    );
+  }
+  return false;
+};
 
 export default summonBobbyB;
