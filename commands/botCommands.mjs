@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable radix */
 /* eslint-disable import/extensions */
+/* eslint-disable no-console */
 import axios from 'axios';
 import { NoImagesFoundException } from '../utils/exceptions.js';
 import {

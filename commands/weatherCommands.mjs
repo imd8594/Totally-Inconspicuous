@@ -1,19 +1,21 @@
 /* eslint-disable import/extensions */
+/* eslint-disable no-console */
+/* eslint-disable arrow-body-style */
 /**
  * @fileoverview
  * Bot commands for interacting with the Dark Sky API for weather information
  */
-import simplesky from 'simplesky';
-import { sendMessageWithOptions } from '../utils/Utils.mjs';
+import Simplesky from 'simplesky';
 import dotenv from 'dotenv';
+import { sendMessageWithOptions } from '../utils/Utils.mjs';
 
 dotenv.config();
 
 
-const DARK_SKY_API_KEY = process.env.DARK_SKY_API_KEY;
-const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const { DARK_SKY_API_KEY } = process.env;
+const { GOOGLE_MAPS_API_KEY } = process.env;
 
-const weather = new simplesky(GOOGLE_MAPS_API_KEY, DARK_SKY_API_KEY);
+const weather = new Simplesky(GOOGLE_MAPS_API_KEY, DARK_SKY_API_KEY);
 const coordsRecord = [];
 
 const getWeekDay = (day) => {
@@ -35,6 +37,7 @@ const getWeekDay = (day) => {
  * in a file, and then only calling the API to fetch the coords if we don't already have them
  * @param location - The plain text location we want the coords of
  */
+/* eslint-disable prefer-destructuring */
 const recordCoordsFromLocation = async (location) => {
   let lat = 0;
   let long = 0;
@@ -102,4 +105,5 @@ export const getWeeklyForecast = async (args, message) => {
   } else {
     return sendMessageWithOptions(message, 'Please specify a location and try again! ex. !ti weather forecast 01056', true);
   }
+  return false;
 };

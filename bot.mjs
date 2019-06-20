@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+/* eslint-disable no-console */
 import Discord from 'discord.js';
 import dotenv from 'dotenv';
 import {
@@ -35,16 +36,17 @@ client.on('message', async (message) => {
     await changeNicknameCommand(message);
   }
 
-  // summon Bobby B
-  if (message.content.toLowerCase().includes('bobby b')) {
+  // check for prefix, bots will ignore messages with prefix
+  if (!message.content.startsWith(PREFIX)) {
+    // summon Bobby B
     await summonBobbyB(message);
+
+    // summon Dog
+    await summonDog(message);
+
+    // on message function ends here if the prefix does not match
+    return;
   }
-
-  // summon Dog
-  await summonDog(message);
-
-  // check for prefix
-  if (!message.content.startsWith(PREFIX)) return;
 
   // slice out arguments
   const args = message.content.toLowerCase().slice(PREFIX.length).trim().split(/ +/);
